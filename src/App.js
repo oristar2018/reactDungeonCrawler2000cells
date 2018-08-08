@@ -7,16 +7,17 @@ class App extends Component {
     super(props)
     this.state = {
       gameBoard: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]], /*[["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], ["10", "11", "12"]]*/
-      test: function (argument) {
-        return "test"
-      }
+      player_health: "5000",
+      ennemy_health: "no current ennemy",
+      start: false
     };
-    this.cellEvent = this.cellEvent.bind(this)
+    this.cellEvent = this.cellEvent.bind(this);
+    this.start = this.start.bind(this)
   }
   
 
-  UNSAFE_componentWillMount() {
-
+  /*UNSAFE_componentWillMount() {
+    if (this.state.start === true) {
     this.setState((prevState) => {
       var count = [0, 20];
       for (var i = 0; i < 100; i++) {
@@ -33,29 +34,57 @@ class App extends Component {
     }, () => console.log(this.state.gameBoard))
     /*let playerCell = document.getElementById("2");
     console.log(playerCell)
-    playerCell.focus();*/
+    playerCell.focus();
   }
+}*/
 
-  componentDidMount() {
-    let playerCell = document.getElementById("129");
+  componentDidUpdate() {
+    if (this.state.start === true) {let playerCell = document.getElementById("129");
     console.log(playerCell)
     
     playerCell.focus();
-    console.log(this.state.test());
+    
 
     let cells = document.getElementsByClassName('cell');
     console.log(cells);
 
     for (var i = 0; i <   cells.length; i++) {
-        var random = Math.floor(Math.random() * 6);
+        var random = Math.random() * 100;
+        var randomHealth = Math.floor(Math.random() * (1000 - 200) + 200);
+        var randomWeapon = Math.floor(Math.random() * (100 - 20) + 20);
         //console.log(random)
-        if (random < 2) {
+        if (random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth < 600) {
+          
+          cells[i].style.background = "green";
+          cells[i].style.width = "50px";
+          cells[i].style.height = "50px";
+          cells[i].setAttribute('data-health',  JSON.stringify(randomHealth));
+          cells[i].setAttribute('data-weapon', '20')
+        }
+
+        if (random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth >= 600) {
+          
+          cells[i].style.background = "purple";
+          cells[i].style.width = "50px";
+          cells[i].style.height = "50px";
+          cells[i].setAttribute('data-health', JSON.stringify(randomHealth));
+          cells[i].setAttribute('data-weapon', '20')
+        }
+
+         if (random < 2.5 && cells[i].dataset.borderRight === "true" || cells[i].dataset.borderLeft === "true") {
+          cells[i].style.background = "cyan";
+          cells[i].style.width = "50px";
+          cells[i].style.height = "50px";
+        
+        }
+
+        if (random < 30 && random >= 2.5) {
           cells[i].style.background = "silver";
           cells[i].style.width = "50px";
           cells[i].style.height = "50px"
         }
 
-        else if (random >= 2) { 
+        else if (random >= 30) { 
             cells[i].style.background = "cyan"
             cells[i].style.width = "50px";
             cells[i].style.height = "50px"
@@ -64,10 +93,30 @@ class App extends Component {
 
     
 
-
+  }
 
   }
 
+
+  start(e) {
+    
+    this.setState((prevState) => {
+      var count = [0, 20];
+
+      for (var i = 0; i < 100; i++) {
+        let arr = [];
+        prevState.gameBoard.push(arr);
+        count[0] += 20;
+        count[1] += 20;
+        for (var j = count[0]; j < count[1]; j++) {
+               arr.push(JSON.stringify(j))
+
+
+
+           }   };
+        return { start: true }
+    }, () => console.log(this.state.gameBoard))
+  }
 
   cellEvent(e) {
 
@@ -81,7 +130,7 @@ class App extends Component {
 
       switch(e.key) {
         case "ArrowUp":
-          if (upCell.style.background === "cyan" && upCell.dataset.health > 0) {
+          if (upCell.style.background === "green" && parseInt(upCell.dataset.health) > 0 || upCell.style.background === "purple" && parseInt(upCell.dataset.health) > 0 ) {
             let playerHealth = currentCell.dataset.health;
             let ennemyHealth = upCell.dataset.health;
             let playerWeapon = currentCell.dataset.weapon;
@@ -92,11 +141,13 @@ class App extends Component {
 
             currentCell.dataset.health = JSON.stringify(playerHealth);
             upCell.dataset.health = JSON.stringify(ennemyHealth);
-            console.log(upCell.dataset.health, currentCell.dataset.health)
+            console.log(upCell.dataset.health, currentCell.dataset.health);
+
+            
           }
 
 
-         else if (upCell.style.background === "cyan") {       
+         else if (upCell.style.background === "cyan" || upCell.style.background === "green" || upCell.style.background === "purple") {       
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex'); 
           upCell.style.background = "red";
@@ -110,7 +161,23 @@ class App extends Component {
           return "done";
           break; 
         case "ArrowDown":
-          if (downCell.style.background === "cyan") { 
+
+          if (downCell.style.background === "green" && parseInt(downCell.dataset.health) > 0 || downCell.style.background === "purple" && parseInt(downCell.dataset.health) > 0) {
+            let playerHealth = currentCell.dataset.health;
+            let ennemyHealth = downCell.dataset.health;
+            let playerWeapon = currentCell.dataset.weapon;
+            let ennemyWeapon = downCell.dataset.weapon;
+            
+            playerHealth -= ennemyWeapon;
+            ennemyHealth -= playerWeapon;
+
+            currentCell.dataset.health = JSON.stringify(playerHealth);
+            downCell.dataset.health = JSON.stringify(ennemyHealth);
+            console.log(downCell.dataset.health, currentCell.dataset.health)
+          }
+
+
+          else if (downCell.style.background === "cyan" || downCell.style.background === "green" || downCell.style.background === "purple") { 
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex');  
           downCell.style.background = "red";
@@ -123,7 +190,23 @@ class App extends Component {
           return "done";
           break;
         case "ArrowLeft":
-          if (leftCell.style.background === "cyan" && currentCell.dataset.borderLeft == "false") { 
+          
+          if (leftCell.style.background === "green" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "purple" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false") {
+            let playerHealth = currentCell.dataset.health;
+            let ennemyHealth = leftCell.dataset.health;
+            let playerWeapon = currentCell.dataset.weapon;
+            let ennemyWeapon = leftCell.dataset.weapon;
+            
+            playerHealth -= ennemyWeapon;
+            ennemyHealth -= playerWeapon;
+
+            currentCell.dataset.health = JSON.stringify(playerHealth);
+            leftCell.dataset.health = JSON.stringify(ennemyHealth);
+            console.log(leftCell.dataset.health, currentCell.dataset.health)
+          }
+
+
+          else if (leftCell.style.background === "cyan" && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "green" && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "purple" && currentCell.dataset.borderLeft == "false") { 
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex');  
           leftCell.style.background = "red";
@@ -150,8 +233,23 @@ class App extends Component {
           return "done";
           break;
         case "ArrowRight":
-          console.log('ok');
-          if (rightCell.style.background === "cyan" && currentCell.dataset.borderRight == "false") { 
+
+          if (rightCell.style.background === "green" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false" || rightCell.style.background === "purple" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false") {
+            let playerHealth = currentCell.dataset.health;
+            let ennemyHealth = rightCell.dataset.health;
+            let playerWeapon = currentCell.dataset.weapon;
+            let ennemyWeapon = rightCell.dataset.weapon;
+            
+            playerHealth -= ennemyWeapon;
+            ennemyHealth -= playerWeapon;
+
+            currentCell.dataset.health = JSON.stringify(playerHealth);
+            rightCell.dataset.health = JSON.stringify(ennemyHealth);
+            console.log(rightCell.dataset.health, currentCell.dataset.health)
+          }
+
+          
+          else if (rightCell.style.background === "cyan" && currentCell.dataset.borderRight == "false" || rightCell.style.background === "purple" && currentCell.dataset.borderRight == "false" || rightCell.style.background === "green" && currentCell.dataset.borderRight == "false") { 
           console.log('fires2')
           currentCell.style.background = "cyan";  
           currentCell.removeAttribute('tabIndex'); 
@@ -187,8 +285,16 @@ class App extends Component {
 
 }
   render() {
-   
-  return this.state.gameBoard.reverse().map((x) => {
+  if (this.state.start === false) { return <div><button onClick={this.start}>test</button></div>}  
+  if (this.state.start === true) { 
+  return <div>
+            <div>
+              <p>player health: {this.state.player_health}</p>
+              <p>ennemy health: {this.state.ennemy_health}</p>
+            </div>
+
+
+  <div className="container">{this.state.gameBoard.reverse().map((x) => {
        if (x[9] === "129") { 
       return ( <div style={{display: "flex", flexDirection: "row"}} className="row" >
         
@@ -203,7 +309,7 @@ class App extends Component {
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[8]}>{x[8]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" data-health="5000" data-weapon="50" style={{background: "red"}} tabIndex="0" id={x[9]}>{x[9]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[10]}>{x[10]}</div>
-          <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" data-health="200" data-weapon="20" style={{background: "cyan"}} id={x[11]}>ennemy</div>
+          <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" style={{background: "cyan"}} id={x[11]}>{x[11]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[12]}>{x[12]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[13]}>{x[13]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[14]}>{x[14]}</div>
@@ -256,7 +362,8 @@ class App extends Component {
         </div>)
     }
 
-  })
+  })}
+</div></div>}
 
   }
 }
