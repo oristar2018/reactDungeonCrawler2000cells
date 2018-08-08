@@ -56,30 +56,23 @@ class App extends Component {
         //console.log(random)
         if (random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth < 600) {
           
-          cells[i].style.background = "url('gobelin.jpg')";
-          cells[i].style.backgroundRepeat = "no-repeat";
-          cells[i].style.backgroundSize = "contain";
-          cells[i].style.color = "green";
+          cells[i].style.background = "green";
           cells[i].style.width = "50px";
           cells[i].style.height = "50px";
-          cells[i].setAttribute('data-health',  JSON.stringify(randomHealth / 5));
-          cells[i].setAttribute('data-weapon', '5')
+          cells[i].setAttribute('data-health',  JSON.stringify(randomHealth));
+          cells[i].setAttribute('data-weapon', '20')
         }
 
         if (random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth >= 600) {
           
-          cells[i].style.background = "url('ennemy2.jpg')";
-          cells[i].style.backgroundSize = "contain";
-          cells[i].style.color = "purple";
+          cells[i].style.background = "purple";
           cells[i].style.width = "50px";
           cells[i].style.height = "50px";
-          cells[i].setAttribute('data-health', JSON.stringify(randomHealth / 2));
-          cells[i].setAttribute('data-weapon', '15')
+          cells[i].setAttribute('data-health', JSON.stringify(randomHealth));
+          cells[i].setAttribute('data-weapon', '20')
         }
-         
-         //ennemies can't spawn in corners
 
-         if (random < 2.5 && cells[i].dataset.borderRight === "true" || random < 2.5 && cells[i].dataset.borderLeft === "true") {
+         if (random < 2.5 && cells[i].dataset.borderRight === "true" || cells[i].dataset.borderLeft === "true") {
           cells[i].style.background = "cyan";
           cells[i].style.width = "50px";
           cells[i].style.height = "50px";
@@ -93,26 +86,7 @@ class App extends Component {
           cells[i].style.height = "50px"
         }
 
-        if (random >= 30 && random < 33  && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false") {
-          cells[i].style.color = "yellow";  
-          cells[i].style.background = "url('potion.jpg')";
-          cells[i].style.backgroundSize = "contain";
-          cells[i].style.backgroundRepeat = "no-repeat";
-          cells[i].style.width = "50px";
-          cells[i].style.height = "50px";
-          cells[i].setAttribute('data-healthpotion', '50');
-
-        }
-
-        if (random >= 30 && random < 33  && cells[i].dataset.borderRight === "true" || random >= 30 && random < 33  && cells[i].dataset.borderLeft === "true") {
-
-             cells[i].style.background = "cyan";
-             cells[i].style.width = "50px";
-             cells[i].style.height = "50px";
-
-        }
-
-        else if (random >= 33) { 
+        else if (random >= 30) { 
             cells[i].style.background = "cyan"
             cells[i].style.width = "50px";
             cells[i].style.height = "50px"
@@ -163,71 +137,36 @@ class App extends Component {
 
       switch(e.key) {
         case "ArrowUp":
-          if (upCell.style.color === "yellow") {
-            let playerHealth = parseInt(currentCell.dataset.health);
-            let healthpotion = parseInt(upCell.dataset.healthpotion);
-            console.log(playerHealth, healthpotion);
-
-            playerHealth += healthpotion;
-
-            currentCell.dataset.health = playerHealth;
-            currentCell.style.background = "cyan"; 
-            currentCell.removeAttribute('tabIndex'); 
-            upCell.style.background = "url('warrior.png')";
-            upCell.style.backgroundSize = "contain";
-            upCell.setAttribute('data-health', currentCell.dataset.health);
-            upCell.setAttribute('data-experience', currentCell.dataset.experience);
-            upCell.setAttribute('data-level', currentCell.dataset.level);
-            currentCell.removeAttribute('data-health'); 
-            currentCell.removeAttribute('data-experience');
-            currentCell.removeAttribute('data-level'); 
-            upCell.setAttribute('data-weapon', '50')
-            upCell.setAttribute('tabIndex', '0') 
-            upCell.focus() 
-            testons.textContent = "health: " + upCell.dataset.health + " experience: " + upCell.dataset.experience + " level: " + upCell.dataset.level;
-
-          }
-
-          if (upCell.style.color === "green" && parseInt(upCell.dataset.health) > 0 || upCell.style.color === "purple" && parseInt(upCell.dataset.health) > 0 ) {
+          if (upCell.style.background === "green" && parseInt(upCell.dataset.health) > 0 || upCell.style.background === "purple" && parseInt(upCell.dataset.health) > 0 ) {
             let playerHealth = parseInt(currentCell.dataset.health);
             let playerExperience = parseInt(currentCell.dataset.experience);
             let ennemyHealth = parseInt(upCell.dataset.health);
             let playerWeapon = parseInt(currentCell.dataset.weapon);
             let ennemyWeapon = parseInt(upCell.dataset.weapon);
-            let playerLevel = parseInt(currentCell.dataset.level);
-
             
             playerHealth -= ennemyWeapon;
             ennemyHealth -= playerWeapon;
             playerExperience += playerWeapon;
 
-            if (playerExperience > 1000) { playerLevel = 1}
-            if (playerExperience > 2000) { playerLevel = 2}
-            if (playerExperience > 3000) { playerLevel = 3}
-            if (playerExperience > 4000) { playerLevel = 4}
-
             currentCell.dataset.health = JSON.stringify(playerHealth);
             upCell.dataset.health = JSON.stringify(ennemyHealth);
             currentCell.dataset.experience = JSON.stringify(playerExperience);
-            currentCell.dataset.level = JSON.stringify(playerLevel);
             console.log(upCell.dataset.health, currentCell.dataset.health, currentCell.dataset.experience);
-            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience + " level: " + currentCell.dataset.level;
+            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience;
 
             
           }
 
 
-         else if (upCell.style.background === "cyan" || upCell.style.color === "green" || upCell.style.color === "purple") {       
+         else if (upCell.style.background === "cyan" || upCell.style.background === "green" || upCell.style.background === "purple") {       
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex'); 
           upCell.style.background = "url('warrior.png')";
           upCell.style.backgroundSize = "contain";
           upCell.setAttribute('data-health', currentCell.dataset.health);
           upCell.setAttribute('data-experience', currentCell.dataset.experience);
-          upCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level'); 
+          currentCell.removeAttribute('data-experience'); 
           upCell.setAttribute('data-weapon', '50')
           upCell.setAttribute('tabIndex', '0') 
           upCell.focus() 
@@ -236,70 +175,36 @@ class App extends Component {
           return "done";
           break; 
         case "ArrowDown":
-          if (downCell.style.color === "yellow") {
-            let playerHealth = parseInt(currentCell.dataset.health);
-            let healthpotion = parseInt(downCell.dataset.healthpotion);
 
-            playerHealth += healthpotion;
-
-            currentCell.dataset.health = playerHealth;
-            currentCell.style.background = "cyan"; 
-            currentCell.removeAttribute('tabIndex');  
-            downCell.style.background = "url('warrior.png')";
-            downCell.style.backgroundSize = "contain";
-            downCell.setAttribute('data-health', currentCell.dataset.health);
-            downCell.setAttribute('data-experience', currentCell.dataset.experience);
-            downCell.setAttribute('data-level', currentCell.dataset.level);
-            currentCell.removeAttribute('data-health'); 
-            currentCell.removeAttribute('data-experience');
-            currentCell.removeAttribute('data-level');  
-            downCell.setAttribute('data-weapon', '50')
-            downCell.setAttribute('tabIndex', '0'); 
-            downCell.focus()
-            testons.textContent = "health: " + downCell.dataset.health + " experience: " + downCell.dataset.experience + " level: " + downCell.dataset.level;
-
-          } 
-
-          if (downCell.style.color === "green" && parseInt(downCell.dataset.health) > 0 || downCell.style.color === "purple" && parseInt(downCell.dataset.health) > 0) {
+          if (downCell.style.background === "green" && parseInt(downCell.dataset.health) > 0 || downCell.style.background === "purple" && parseInt(downCell.dataset.health) > 0) {
             let playerHealth = parseInt(currentCell.dataset.health);
             let playerExperience = parseInt(currentCell.dataset.experience);
             let ennemyHealth = parseInt(downCell.dataset.health);
             let playerWeapon = parseInt(currentCell.dataset.weapon);
             let ennemyWeapon = parseInt(downCell.dataset.weapon);
-            let playerLevel = parseInt(currentCell.dataset.level);
-
             
             playerHealth -= ennemyWeapon;
             ennemyHealth -= playerWeapon;
             playerExperience += playerWeapon;
 
-
-            if (playerExperience >= 1000) { playerLevel = 1}
-            if (playerExperience >= 2000) { playerLevel = 2}
-            if (playerExperience >= 3000) { playerLevel = 3}
-            if (playerExperience >= 4000) { playerLevel = 4}
-
             currentCell.dataset.health = JSON.stringify(playerHealth);
             downCell.dataset.health = JSON.stringify(ennemyHealth);
             currentCell.dataset.experience = JSON.stringify(playerExperience);
-            currentCell.dataset.level = JSON.stringify(playerLevel);
             console.log(downCell.dataset.health, currentCell.dataset.health, currentCell.dataset.experience);
-            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience + " level: " + currentCell.dataset.level;
+            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience;
  
           }
 
 
-          else if (downCell.style.background === "cyan" || downCell.style.color === "green" || downCell.style.color === "purple") { 
+          else if (downCell.style.background === "cyan" || downCell.style.background === "green" || downCell.style.background === "purple") { 
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex');  
           downCell.style.background = "url('warrior.png')";
           downCell.style.backgroundSize = "contain";
           downCell.setAttribute('data-health', currentCell.dataset.health);
           downCell.setAttribute('data-experience', currentCell.dataset.experience);
-          downCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level'); 
+          currentCell.removeAttribute('data-experience'); 
           downCell.setAttribute('data-weapon', '50')
           downCell.setAttribute('tabIndex', '0'); 
           downCell.focus()
@@ -307,69 +212,36 @@ class App extends Component {
           return "done";
           break;
         case "ArrowLeft":
-
-          if (leftCell.style.color === "yellow") {
-            let playerHealth = parseInt(currentCell.dataset.health);
-            let healthpotion = parseInt(leftCell.dataset.healthpotion);
-
-            playerHealth += healthpotion;
-
-            currentCell.dataset.health = playerHealth;
-            currentCell.style.background = "cyan"; 
-            currentCell.removeAttribute('tabIndex');  
-            leftCell.style.background = "url('warrior.png')";
-            leftCell.style.backgroundSize = "contain";
-            leftCell.setAttribute('data-health', currentCell.dataset.health);
-            leftCell.setAttribute('data-experience', currentCell.dataset.experience);
-            leftCell.setAttribute('data-level', currentCell.dataset.level);
-            currentCell.removeAttribute('data-health'); 
-            currentCell.removeAttribute('data-experience');
-            currentCell.removeAttribute('data-level'); 
-            leftCell.setAttribute('data-weapon', '50')
-            leftCell.setAttribute('tabIndex', '0'); 
-            leftCell.focus()
-            testons.textContent = "health: " + leftCell.dataset.health + " experience: " + leftCell.dataset.experience + " level: " + leftCell.dataset.level;
-
-          } 
           
-          if (leftCell.style.color === "green" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false" || leftCell.style.color === "purple" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false") {
+          if (leftCell.style.background === "green" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "purple" && parseInt(leftCell.dataset.health) > 0 && currentCell.dataset.borderLeft == "false") {
             let playerHealth = parseInt(currentCell.dataset.health);
             let playerExperience = parseInt(currentCell.dataset.experience);
             let ennemyHealth = parseInt(leftCell.dataset.health);
             let playerWeapon = parseInt(currentCell.dataset.weapon);
             let ennemyWeapon = parseInt(leftCell.dataset.weapon);
-            let playerLevel = parseInt(currentCell.dataset.level);
             
             playerHealth -= ennemyWeapon;
             ennemyHealth -= playerWeapon;
             playerExperience += playerWeapon;
 
-            if (playerExperience >= 1000) { playerLevel = 1}
-            if (playerExperience >= 2000) { playerLevel = 2}
-            if (playerExperience >= 3000) { playerLevel = 3}
-            if (playerExperience >= 4000) { playerLevel = 4}
-
             currentCell.dataset.health = JSON.stringify(playerHealth);
             leftCell.dataset.health = JSON.stringify(ennemyHealth);
             currentCell.dataset.experience = JSON.stringify(playerExperience);
-            currentCell.dataset.level = JSON.stringify(playerLevel);
             console.log(leftCell.dataset.health, currentCell.dataset.health, currentCell.dataset.experience);
-            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience + " level: " + currentCell.dataset.level;
+            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience;
 
           }
 
 
-          else if (leftCell.style.background === "cyan" && currentCell.dataset.borderLeft == "false" || leftCell.style.color === "green" && currentCell.dataset.borderLeft == "false" || leftCell.style.color === "purple" && currentCell.dataset.borderLeft == "false") { 
+          else if (leftCell.style.background === "cyan" && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "green" && currentCell.dataset.borderLeft == "false" || leftCell.style.background === "purple" && currentCell.dataset.borderLeft == "false") { 
           currentCell.style.background = "cyan"; 
           currentCell.removeAttribute('tabIndex');  
           leftCell.style.background = "url('warrior.png')";
           leftCell.style.backgroundSize = "contain";
           leftCell.setAttribute('data-health', currentCell.dataset.health);
           leftCell.setAttribute('data-experience', currentCell.dataset.experience);
-          leftCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level'); 
+          currentCell.removeAttribute('data-experience'); 
           leftCell.setAttribute('data-weapon', '50')
           leftCell.setAttribute('tabIndex', '0') 
           leftCell.focus()
@@ -384,10 +256,8 @@ class App extends Component {
           currentRightCell.style.backgroundSize = "contain";
           currentRightCell.setAttribute('data-health', currentCell.dataset.health);
           currentRightCell.setAttribute('data-experience', currentCell.dataset.experience);
-          currentRightCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level');  
+          currentCell.removeAttribute('data-experience'); 
           currentRightCell.setAttribute('data-weapon', '50')
           currentRightCell.setAttribute('tabIndex', '0') 
           currentRightCell.focus()
@@ -397,58 +267,27 @@ class App extends Component {
           break;
         case "ArrowRight":
 
-          if (rightCell.style.color === "yellow") {
-            let playerHealth = parseInt(currentCell.dataset.health);
-            let healthpotion = parseInt(rightCell.dataset.healthpotion);
-
-            playerHealth += healthpotion;
-
-            currentCell.dataset.health = playerHealth;
-            currentCell.style.background = "cyan"; 
-            currentCell.removeAttribute('tabIndex');  
-            rightCell.style.background = "url('warrior.png')";
-            rightCell.style.backgroundSize = "contain";
-            rightCell.setAttribute('data-health', currentCell.dataset.health);
-            rightCell.setAttribute('data-experience', currentCell.dataset.experience);
-            rightCell.setAttribute('data-level', currentCell.dataset.level);
-            currentCell.removeAttribute('data-health'); 
-            currentCell.removeAttribute('data-experience');
-            currentCell.removeAttribute('data-level'); 
-            rightCell.setAttribute('data-weapon', '50')
-            rightCell.setAttribute('tabIndex', '0'); 
-            rightCell.focus()
-            testons.textContent = "health: " + rightCell.dataset.health + " experience: " + rightCell.dataset.experience + " level: " + rightCell.dataset.level;
-
-          } 
-
-          if (rightCell.style.color === "green" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false" || rightCell.style.color === "purple" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false") {
+          if (rightCell.style.background === "green" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false" || rightCell.style.background === "purple" && parseInt(rightCell.dataset.health) > 0 && currentCell.dataset.borderRight == "false") {
             let playerHealth = parseInt(currentCell.dataset.health);
             let playerExperience = parseInt(currentCell.dataset.experience);
             let ennemyHealth = parseInt(rightCell.dataset.health);
             let playerWeapon = parseInt(currentCell.dataset.weapon);
             let ennemyWeapon = parseInt(rightCell.dataset.weapon);
-            let playerLevel = parseInt(currentCell.dataset.level);
             
             playerHealth -= ennemyWeapon;
             ennemyHealth -= playerWeapon;
             playerExperience += playerWeapon;
 
-            if (playerExperience >= 1000) { playerLevel = 1}
-            if (playerExperience >= 2000) { playerLevel = 2}
-            if (playerExperience >= 3000) { playerLevel = 3}
-            if (playerExperience >= 4000) { playerLevel = 4}
-
             currentCell.dataset.health = JSON.stringify(playerHealth);
             rightCell.dataset.health = JSON.stringify(ennemyHealth);
             currentCell.dataset.experience = JSON.stringify(playerExperience);
-            currentCell.dataset.level = JSON.stringify(playerLevel);
             console.log(rightCell.dataset.health, currentCell.dataset.health, currentCell.dataset.experience);
-            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience + " level: " + currentCell.dataset.level;
+            testons.textContent = "health: " + currentCell.dataset.health + " experience: " + currentCell.dataset.experience;
 
           }
 
           
-          else if (rightCell.style.background === "cyan" && currentCell.dataset.borderRight == "false" || rightCell.style.color === "purple" && currentCell.dataset.borderRight == "false" || rightCell.style.color === "green" && currentCell.dataset.borderRight == "false") { 
+          else if (rightCell.style.background === "cyan" && currentCell.dataset.borderRight == "false" || rightCell.style.background === "purple" && currentCell.dataset.borderRight == "false" || rightCell.style.background === "green" && currentCell.dataset.borderRight == "false") { 
           console.log('fires2')
           currentCell.style.background = "cyan";  
           currentCell.removeAttribute('tabIndex'); 
@@ -456,10 +295,8 @@ class App extends Component {
           rightCell.style.backgroundSize = "contain";
           rightCell.setAttribute('data-health', currentCell.dataset.health);
           rightCell.setAttribute('data-experience', currentCell.dataset.experience);
-          rightCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level'); 
+          currentCell.removeAttribute('data-experience'); 
           rightCell.setAttribute('data-weapon', '50')
           rightCell.setAttribute('tabIndex', '0') 
           rightCell.focus()
@@ -474,10 +311,8 @@ class App extends Component {
           currentLeftCell.style.backgroundSize = "contain";
           currentLeftCell.setAttribute('data-health', currentCell.dataset.health);
           currentLeftCell.setAttribute('data-experience', currentCell.dataset.experience);
-          currentLeftCell.setAttribute('data-level', currentCell.dataset.level);
           currentCell.removeAttribute('data-health'); 
-          currentCell.removeAttribute('data-experience');
-          currentCell.removeAttribute('data-level'); 
+          currentCell.removeAttribute('data-experience'); 
           currentLeftCell.setAttribute('data-weapon', '50')
           currentLeftCell.setAttribute('tabIndex', '0') 
           currentLeftCell.focus()
@@ -518,7 +353,7 @@ class App extends Component {
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[6]}>{x[6]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[7]}>{x[7]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[8]}>{x[8]}</div>
-          <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" data-health="5000" data-weapon="50" data-experience="0" data-level="0" style={{background: "url('warrior.png')", backgroundSize: "contain"}} tabIndex="0" id={x[9]}>{x[9]}</div>
+          <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" data-health="5000" data-weapon="50" data-experience="0" style={{background: "url('warrior.png')", backgroundSize: "contain"}} tabIndex="0" id={x[9]}>{x[9]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[10]}>{x[10]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" style={{background: "cyan"}} id={x[11]}>{x[11]}</div>
           <div className="cell" onKeyDown={this.cellEvent} data-border-right="false" data-border-left="false" id={x[12]}>{x[12]}</div>
