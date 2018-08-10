@@ -34,4 +34,7 @@
   overflow-y: scroll;
 }
 
-
+.cell {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
