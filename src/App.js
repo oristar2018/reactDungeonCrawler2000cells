@@ -735,15 +735,47 @@ class App extends Component {
   const test = () => {return (<div>testons</div>)};
 
 
-  if (this.state.start === false) { return <div><button onClick={this.start}>test</button></div>}  
+  if (this.state.start === false) { return <div>
+
+    <h1>Dungeon Of Arcana Rogue Game</h1>
+    <div style={{ display: "flex", flexDirection: "row", alignItems: "center"}}>
+    <div style={{display: "flex", flexDirection: "column", order: "2"}}>
+    <img className="introPage" src="wizardFinal.jpg" alt="player Image"></img>
+    <img className="introPage" src="gobelin.jpg" alt="player Image"></img>
+    <img className="introPage" src="potion.jpg" alt="player Image"></img>
+    <img className="introPage" src="arcana2.jpg" alt="player Image"></img>
+    <img className="introPage" src="ennemy2.jpg" alt="player Image"></img>
+    <img className="introPage" src="boss.png" alt="player Image"></img>
+
+    </div>
+
+    <div style={{display: "flex", flexDirection: "column", height: "auto", order: "1"}}>
+    <p>This is your avatar</p>
+    <p>Start by defeating those weaker ennemies!</p>
+    <p>Grab potions to increase your health!</p>
+    <p>Grab arcana to increase your magic power!</p>
+    <p>And then go on to fight tougher ennemies</p>
+    <p>Reach lvl 4 and receive bonuses to attempt the boss!</p>
+    </div>
+
+    </div>
+
+
+    <button onClick={this.start}>Start</button>
+
+
+
+
+
+    </div>}  
   if (this.state.start === true) { 
   return <div>
   <audio id="Fireball" src="Fireball.wav"></audio>
   <audio id="Fireball1" src="Fireball1.mp3"></audio>
   <audio id="Fireball2" src="Fireball2.mp3"></audio>
             <div id="testons">
-              <p>player health: {test()}</p>
-              <p>ennemy health: {this.state.ennemy_health}</p>
+              health: 500 experience: 0 level: 0 arcana: 50
+              
             </div>
 
 

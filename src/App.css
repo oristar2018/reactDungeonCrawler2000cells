@@ -38,3 +38,13 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.introPage {
+
+  height: 15vh;
+  width: 10vw;
+}
+
+p {
+  height: 10vh;
+}
