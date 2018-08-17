@@ -70,6 +70,47 @@ class App extends Component {
 
         }
 
+        if (cells[i].id === "128") { 
+             cells[i].style.background = "transparent";
+            cells[i].style.color = "cyan";
+            cells[i].style.width = "75px";
+            cells[i].style.height = "75px"
+
+        }
+
+         if (cells[i].id === "127") { 
+             cells[i].style.background = "transparent";
+            cells[i].style.color = "cyan";
+            cells[i].style.width = "75px";
+            cells[i].style.height = "75px"
+
+        }
+
+         if (cells[i].id === "130") { 
+             cells[i].style.background = "transparent";
+            cells[i].style.color = "cyan";
+            cells[i].style.width = "75px";
+            cells[i].style.height = "75px"
+
+        }
+
+         if (cells[i].id === "131") { 
+             cells[i].style.background = "transparent";
+            cells[i].style.color = "cyan";
+            cells[i].style.width = "75px";
+            cells[i].style.height = "75px"
+
+        }
+
+           if (cells[i].id === "20") { 
+          cells[i].style.background = "url('/wall.jpg')";
+          cells[i].style.color = "navy";
+          cells[i].style.backgroundSize = "75px 75px";
+          cells[i].style.width = "75px";
+          cells[i].style.height = "75px"
+
+        }
+
         if (cells[i].id === "1930" || cells[i].id === "1931" || cells[i].id === "1950" || cells[i].id === "1951") {
           cells[i].style.background = "url('boss.png')";
           cells[i].style.color = "purple";
@@ -82,7 +123,7 @@ class App extends Component {
 
         }
 
-        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth < 600) {
+        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth < 600) {
           
           cells[i].style.background = "url('goblin5.png')";
           cells[i].style.backgroundRepeat = "no-repeat";
@@ -94,7 +135,7 @@ class App extends Component {
           cells[i].setAttribute('data-weapon', '7')
         }
 
-        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth >= 600) {
+        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false" && randomHealth >= 600) {
           
           cells[i].style.background = "url('Wraith.png')";
           cells[i].style.backgroundSize = "75px 75px";
@@ -108,7 +149,7 @@ class App extends Component {
          
          //ennemies can't spawn in corners
 
-         if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderLeft === "true")) {
+         if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 2.5 && cells[i].dataset.borderLeft === "true")) {
           cells[i].style.background = "transparent";
           cells[i].style.color = "cyan";
           cells[i].style.width = "75px";
@@ -116,7 +157,7 @@ class App extends Component {
         
         }
 
-        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 30 && random >= 2.5) {
+        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random < 30 && random >= 2.5) {
           cells[i].style.background = "url('/wall.jpg')";
           cells[i].style.color = "navy";
           cells[i].style.backgroundSize = "75px 75px";
@@ -124,7 +165,7 @@ class App extends Component {
           cells[i].style.height = "75px"
         }
 
-        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false") {
+        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false") {
           cells[i].style.color = "yellow";  
           cells[i].style.background = "url('healthPotion2.png')";
           cells[i].style.backgroundSize = "75px 75px";
@@ -136,7 +177,7 @@ class App extends Component {
 
         }
 
-        if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderLeft === "true")) {
+        if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 30 && random < 31.5  && cells[i].dataset.borderLeft === "true")) {
 
              cells[i].style.background = "transparent";
              cells[i].style.color = "cyan";
@@ -145,7 +186,7 @@ class App extends Component {
 
         }
 
-        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false") {
+        if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderRight === "false" && cells[i].dataset.borderLeft === "false") {
           cells[i].style.color = "yellow";  
           cells[i].style.background = "url('arcana3.png')";
           cells[i].style.backgroundSize = "75px 75px";
@@ -157,7 +198,7 @@ class App extends Component {
 
         }
 
-         if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderLeft === "true")) {
+         if ((parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderRight === "true") || (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127" && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 31.5 && random < 33  && cells[i].dataset.borderLeft === "true")) {
 
              cells[i].style.background = "transparent";
              cells[i].style.color = "cyan";
@@ -167,7 +208,7 @@ class App extends Component {
         }
 
 
-        else if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 33) { 
+        else if (parseInt(cells[i].id) > 19 && parseInt(cells[i].id) < 2000 && cells[i].id !== "129" && cells[i].id !== "20" && cells[i].id !== "130"  && cells[i].id !== "131"  && cells[i].id !== "128"  && cells[i].id !== "127"  && cells[i].id !== "1930" && cells[i].id !== "1931" && cells[i].id !== "1950" && cells[i].id !== "1951" && random >= 33) { 
             cells[i].style.background = "transparent";
             cells[i].style.color = "cyan";
             cells[i].style.width = "75px";
