@@ -76,6 +76,10 @@ p {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3rem;
+  margin-right: 1vw;
+
 
 
 }

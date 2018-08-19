@@ -805,7 +805,7 @@ class App extends Component {
 
   if (this.state.start === false) { return <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
 
-    <h1>Dungeon Of Arcana Rogue Game  <button onClick={this.start}>Start</button></h1>
+    <h1 style={{fontFamily: "'Cinzel Decorative', cursive", marginBottom: "5vh"}}>Dungeon Of Arcana Rogue Game  <button onClick={this.start}>Start</button></h1>
     <div style={{ display: "flex", flexDirection: "row", alignItems: "center"}}>
     <div style={{display: "flex", flexDirection: "column", order: "2"}}>
     <img className="introPage" src="wizardFinal.jpg" alt="player Image"></img>
@@ -841,7 +841,7 @@ class App extends Component {
   <audio id="Fireball" src="Fireball.wav"></audio>
   <audio id="Fireball1" src="Fireball1.mp3"></audio>
   <audio id="Fireball2" src="Fireball2.mp3"></audio>
-            <div id="testons">
+            <div style={{fontFamily: "'Cinzel Decorative', cursive", fontSize: "3rem"}}id="testons">
               health: 500 experience: 0 level: 0 arcana: 50
               
             </div>
